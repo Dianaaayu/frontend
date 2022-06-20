@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 const Daftar = () => {
     const [username, setUsername] = useState('');
@@ -16,13 +17,25 @@ const Daftar = () => {
         setEmail(value)
     }
 
-        const changePassword = (e) => {
-            const value = e.target.value
-            setPassword(value)
+    const changePassword = (e) => {
+        const value = e.target.value
+        setPassword(value) 
+    }
+
+    const klikDaftar = () => {
+        const data = {
+            username: username,
+            email: email,
+            password: password
+        }
+        axios.post('http://localhost:3001/daftar', data)
+        .then(result => {
+            console.log(result)
+        })
     }
 
     return (
-        <div style={{ marginTop: "170px" }}>
+        <div style={{ marginTop: '170px' }}>
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
@@ -35,25 +48,24 @@ const Daftar = () => {
 
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input type="text" placeHolder="Email" className="form-control" value={email} onChange={changeEmail}/>
+                                    <input type="text" placeHolder="Email" className="form-control" value={email} onChange={changeEmail} />
                                 </div>
 
                                 <div className="form-group">
                                     <label>Password</label>
-                                    <input type="text" placeHolder="Password" className="form-control" value={password} onChange={changePassword}/>
+                                    <input type="text" placeHolder="Password" className="form-control" pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}" value={password} onChange={changePassword}/>
                                 </div>
-
-                                <button className="btn btn-primary">Daftar</button>{' '}
-                                 <Link to="/" className="btn btn-warning">
-                                    Batal
-                                 </Link>
+                                        <button className="btn btn-primary" onClick={klikDaftar}>Daftar</button>{' '}
+                                        <Link to="/" className="btn btn-warning">
+                                            Batal
+                                        </Link>
+                                    </div>
+                                    </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    )
+                    )
 }
 
-export default Daftar
+                    export default Daftar

@@ -23,7 +23,7 @@ const Login = () => {
                             <div className="card-body">
                                 <div className="form-group">
                                     <label>Username</label>
-                                    <input type="text" placeholder="Username" className="form-control" value={username} onChange={onChangeUsername}/>
+                                    <input type="text" placeholder="Username" className="form-control" pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}" value={username} onChange={onChangeUsername}/>
                                     </div>
 
                                     <div className="form-group">
